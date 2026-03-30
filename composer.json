@@ -11,16 +11,21 @@
     "require": {
         "php": "^8.3",
         "laravel/framework": "^13.0",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0"
     },
     "require-dev": {
+        "captainhook/captainhook": "^5.29",
+        "captainhook/captainhook-phar": "^5.29",
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.5",
         "laravel/pint": "^1.27",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.6",
+        "nunomaduro/larastan": "^3.9",
         "pestphp/pest": "^4.4",
-        "pestphp/pest-plugin-laravel": "^4.1"
+        "pestphp/pest-plugin-laravel": "^4.1",
+        "phpstan/phpstan": "^2.1"
     },
     "autoload": {
         "psr-4": {
@@ -80,6 +85,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
+            "captainhook/captainhook-phar": true,
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
         }
