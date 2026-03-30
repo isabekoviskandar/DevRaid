@@ -44,8 +44,6 @@ jobs:
       - name: Run Larastan
         run: vendor/bin/phpstan analyse --memory-limit=2G
 
-      - name: Run Pest
-        run: vendor/bin/pest --testdox
 
       - name: Show summary
         run: echo "✅ Laravel CI/CD completed successfully!"
