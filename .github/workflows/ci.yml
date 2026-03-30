@@ -1,5 +1,4 @@
 name: Laravel CI/CD
-
 on:
   push:
     branches: [ main, develop ]
@@ -9,7 +8,6 @@ on:
 jobs:
   laravel-ci:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -46,8 +44,8 @@ jobs:
       - name: Run Larastan
         run: vendor/bin/phpstan analyse --memory-limit=2G
 
-      - name: Run PHPUnit
-        run: vendor/bin/phpunit --testdox
+      - name: Run Pest
+        run: vendor/bin/pest --testdox
 
       - name: Show summary
         run: echo "✅ Laravel CI/CD completed successfully!"
