@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -50,18 +51,28 @@ class User extends Authenticatable
         ];
     }
 
-    public function links()
+    public function links(): HasMany
     {
         return $this->hasMany(UserLink::class);
     }
 
-    public function raids()
+    public function raids(): HasMany
     {
         return $this->hasMany(Raid::class, 'created_user_id');
     }
 
-    public function raidUsers()
+    public function raidUsers(): HasMany
     {
         return $this->hasMany(RaidUser::class);
+    }
+
+    public function assignedTasks(): HasMany
+    {
+        return $this->hasMany(Task::class, 'assigned_to');
+    }
+
+    public function createdTasks(): HasMany
+    {
+        return $this->hasMany(Task::class, 'created_user_id');
     }
 }

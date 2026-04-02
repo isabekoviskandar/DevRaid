@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RaidController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('accept-invitation/{raidId}', [RaidController::class, 'acceptRaidInvitation']);
         Route::post('reject-invitation/{raidId}', [RaidController::class, 'rejectRaidInvitation']);
         Route::get('search-suitable-users/{raidId}', [RaidController::class, 'searchSuitableUsers']);
+    });
+
+    Route::prefix('tasks')->group(function () {
+        Route::post('create/{raidId}', [TaskController::class, 'store']);
+        Route::put('update/{taskId}', [TaskController::class, 'update']);
+        Route::delete('delete/{taskId}', [TaskController::class, 'destroy']);
+        Route::get('raid-tasks/{raidId}', [TaskController::class, 'getTask']);
+        Route::get('own-tasks', [TaskController::class, 'getOwnTasks']);
     });
 });

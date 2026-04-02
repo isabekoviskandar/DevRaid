@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Raid extends Model
@@ -40,5 +41,10 @@ class Raid extends Model
             $count = Raid::where('slug', 'like', $slug.'%')->count();
             $raid->slug = $count ? "{$slug}-{$count}" : $slug;
         });
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
     }
 }
