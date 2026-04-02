@@ -44,6 +44,9 @@ class AuthService
             'password' => 'required|string|min:8',
             'bio' => 'required|string',
             'gender' => 'required|string',
+            'soft_skills' => 'required|string',
+            'hard_skills' => 'required|string',
+            'personality_type' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -56,6 +59,9 @@ class AuthService
             'password' => Hash::make($data['password']),
             'bio' => $data['bio'],
             'gender' => $data['gender'],
+            'soft_skills' => $data['soft_skills'] ?? null,
+            'hard_skills' => $data['hard_skills'] ?? null,
+            'personality_type' => $data['personality_type'] ?? null,
         ]);
 
         $token = $user->createToken('API Token')->plainTextToken;

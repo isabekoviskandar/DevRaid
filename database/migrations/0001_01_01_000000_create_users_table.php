@@ -25,6 +25,9 @@ return new class extends Migration
             $table->date('date_of_birth')->nullable();
             $table->string('role')->default('user');
             $table->string('type')->default('standard');
+            $table->string('soft_skills')->nullable();
+            $table->string('hard_skills')->nullable();
+            $table->string('personality_type')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
