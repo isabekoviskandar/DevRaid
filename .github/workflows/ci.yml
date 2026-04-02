@@ -8,6 +8,21 @@ on:
 jobs:
   laravel-ci:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: devraid
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,22 +43,34 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Install Composer dependencies
-        run: composer install --no-progress --prefer-dist --optimize-autoloader --no-scripts
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
       - name: Setup .env
         run: |
           cp .env.example .env
           php artisan key:generate --force
 
+      - name: Update .env for CI
+        run: |
+          sed -i 's/DB_HOST=127.0.0.1/DB_HOST=127.0.0.1/' .env
+          sed -i 's/DB_DATABASE=devraid/DB_DATABASE=devraid/' .env
+          sed -i 's/DB_USERNAME=root/DB_USERNAME=root/' .env
+          sed -i 's/DB_PASSWORD=/DB_PASSWORD=password/' .env
+          sed -i 's/SESSION_DRIVER=database/SESSION_DRIVER=file/' .env
+          sed -i 's/CACHE_STORE=database/CACHE_STORE=file/' .env
+          sed -i 's/QUEUE_CONNECTION=database/QUEUE_CONNECTION=sync/' .env
+
       - name: Laravel package discover
         run: php artisan package:discover --ansi
+
+      - name: Run migrations
+        run: php artisan migrate --force
 
       - name: Run Laravel Pint
         run: vendor/bin/pint --test
 
       - name: Run Larastan
         run: vendor/bin/phpstan analyse --memory-limit=2G
-
 
       - name: Show summary
         run: echo "✅ Laravel CI/CD completed successfully!"

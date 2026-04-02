@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class UserService
 {
@@ -24,7 +23,7 @@ class UserService
 
     public function updateUser(UpdateUserRequest $updateUserRequest)
     {
-        Log::info($updateUserRequest->all());
+
         $data = $updateUserRequest->validated();
 
         $user = Auth::user();
@@ -38,7 +37,6 @@ class UserService
         }
 
         $user->update($data);
-        $user->refresh();
 
         return response()->json($user);
     }
