@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-04-03T15:00:00.000Z",
+  "milestone": "v1.0",
+  "phase": "09",
+  "phase_name": "Captain applications (mock)",
+  "phase_dir": ".planning/phases/09-captain-applications",
+  "plan": "09-01",
+  "status": "complete_with_deferred",
+  "deferred": [
+    {
+      "id": "09-02",
+      "name": "Active Heroes Sheet",
+      "roadmap_ref": "ROADMAP.md Phase 9"
+    }
+  ],
+  "completed_work_summary": "Phases 6–9: HexRadar + hero routes; D20 Roll Hero + reroll + invite stub; RaidBoardView filters + search; CaptainApplicationsSection on /captain/[id]. npm run build OK.",
+  "artifacts": [
+    ".planning/phases/06-hexagon-radar-chart/06-01-SUMMARY.md",
+    ".planning/phases/06-hexagon-radar-chart/06-02-SUMMARY.md",
+    ".planning/phases/06-hexagon-radar-chart/06-VERIFICATION.md",
+    ".planning/phases/07-roll-hero/07-EXECUTION-SUMMARY.md",
+    ".planning/phases/08-raid-board/08-EXECUTION-SUMMARY.md",
+    ".planning/phases/09-captain-applications/09-EXECUTION-SUMMARY.md"
+  ],
+  "next_action": "Wire APIs (GET /raids, POST /apply, hero/match/application). Implement 09-02 Active Heroes Sheet. Optionally add stage filter on /raids and mirror applications on /raids/[id]/board.",
+  "blockers": [],
+  "context_notes": "HANDOFF reset from stale Phase 03 pause. REQUIREMENTS.md traceability updated 2026-04-03."
+}
